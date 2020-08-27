@@ -27,8 +27,8 @@ optional arguments:
   -I INTERFACE, --interface INTERFACE
                         select interface to connect
   -p PORT, --port PORT  select port to connect
-  -L                    generate Windows Payload
-  -W                    generate Linux Payload
+  -L                    generate Linux Payload
+  -W                    generate Windows Payload
   --b64                 generate base64 encoded Windows payload
   -t TOOL, --tool TOOL  specify a tool
   -q, --quiet           don't display logo and useful commands

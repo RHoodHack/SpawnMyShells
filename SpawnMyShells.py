@@ -59,7 +59,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Fast reverse Shell Generator')
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-i','--ip', dest='ip', action='store',help='Ip to connect')
-    group.add_argument('-I','--interface', dest='interface', action='store',help='select ip of interface to connect')
+    group.add_argument('-I','--interface', dest='interface', action='store',help='select interface to connect')
     parser.add_argument('-p','--port' , dest='port', action='store',help='select port to connect',required=True)
     parser.add_argument('-L', help='generate Windows Payload',action="store_true")
     parser.add_argument('-W', help='generate Linux Payload',action="store_true")

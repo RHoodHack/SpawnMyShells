@@ -82,7 +82,7 @@ def printCommands(data,ip,port,command,b64=False):
         for reverse in data[command]:
             payload = reverse['reverse'].replace("<IP>",str(ip)).replace("<PORT>",str(port))
             if "description" in reverse:
-                    print(colored(reverse['description'].replace("<IP>",str(ip)).replace("<PORT>",str(port)) + " :\n",'cyan',attrs=['bold']))
+                    print( "\n" + colored(reverse['description'].replace("<IP>",str(ip)).replace("<PORT>",str(port)) + " :",'cyan',attrs=['bold']))
             if command == "powershell" and b64:
                 print(payload)
                 payload = "powershell -NoP -NonI -W Hidden -Exec Bypass -e " +  base64.b64encode(payload.encode('utf16')[2:]).decode() + "\n"
@@ -99,7 +99,7 @@ def printCommands(data,ip,port,command,b64=False):
             for reverse in data[i]:
                 payload = reverse['reverse'].replace("<IP>",str(ip)).replace("<PORT>",str(port))
                 if "description" in reverse:
-                    print(colored(reverse['description'].replace("<IP>",str(ip)).replace("<PORT>",str(port)) + " :\n",'magenta'))
+                    print("\n" + colored(reverse['description'].replace("<IP>",str(ip)).replace("<PORT>",str(port)) + " :",'magenta'))
                 if i == "powershell" and b64:
 
                     payload = "powershell -NoP -NonI -W Hidden -Exec Bypass -e " +  base64.b64encode(payload.encode('utf16')[2:]).decode() + "\n"

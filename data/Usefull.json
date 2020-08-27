@@ -17,7 +17,7 @@
         "alternative powershell execution" : [
             "powershell -NoP -NonI -W Hidden -Exec Bypass -Command",
             "powershell -nop -c",
-            "powershell -ExecutionPolicy Bypass -File .\\script.ps"
+            "powershell -ExecutionPolicy Bypass -File .\\script.ps1"
         ],
         "Download Files": [
             "copy \\\\<IP>\\SHARE\\ path",

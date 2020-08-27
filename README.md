@@ -25,7 +25,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -i IP, --ip IP        Ip to connect
   -I INTERFACE, --interface INTERFACE
-                        select ip of interface to connect
+                        select interface to connect
   -p PORT, --port PORT  select port to connect
   -L                    generate Windows Payload
   -W                    generate Linux Payload

